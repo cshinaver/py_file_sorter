@@ -1,28 +1,51 @@
 # """Sorts downloads folder"""
 import os
-from shutil import move
-DOWNLOAD_DIRECTORY_PATH = os.path.dirname(__file__)
+from shutil import move, rmtree
+DOWNLOAD_DIRECTORY_PATH = os.path.dirname(os.path.abspath(__file__))
 SORTING_DIRECTORY_PATH = os.path.join(DOWNLOAD_DIRECTORY_PATH, 'files_to_sort')
-my_file_path = os.path.join(SORTING_DIRECTORY_PATH, 'Episode 01 - The Empty Hearse.mkv')
+MOVIE_DESTINATION_PATH = os.path.join(DOWNLOAD_DIRECTORY_PATH, 'Movies')
+TV_SHOW_DESTINATION_PATH = os.path.join(DOWNLOAD_DIRECTORY_PATH, 'TV Shows')
+LEARNING_VIDEOS_DESTINATION_PATH = os.path.join(DOWNLOAD_DIRECTORY_PATH, 'Learning Videos')
+
 
 def primary_sort(file_path):
-    """First pass for sorting.
-    Sorts file that might go to plex (video files) into a separate folder. Might just call secondary function for that file.
+    """
+    Determing file type and sorting
     """
     # Get file extension
     file_name = os.path.basename(file_path)
     file_extension = os.path.splitext(file_path)
     file_extension = file_extension[1]
 
-    # If file is a movie, move to sorted directory (Possibly Rename?)
+    # Movie Selection and Sorting
     if file_extension in ('.mpeg', '.mpg', '.avi', '.mov', '.qt', '.wmv', '.mp4', '.ogm', '.mkv'):
-        # TODO 1. Add check if sorted_files directory exists
-        DESTINATION_PATH = os.path.join(DOWNLOAD_DIRECTORY_PATH, 'sorted_files')
-        DESTINATION_PATH = os.path.join(DESTINATION_PATH, file_name)
-        move(file_path, DESTINATION_PATH)
-	print "%s was moved to %s" % (file_name, DESTINATION_PATH)
+        # TODO 1. Possibly add something to differentiate between TV Shows and
+        # Movies (if not Lynda.com files)
+        if (file_name.find("Lynda.com") != -1):
+            directory_exists(LEARNING_VIDEOS_DESTINATION_PATH)
+            move(file_path, LEARNING_VIDEOS_DESTINATION_PATH)
+            print "%s was moved to %s" % (file_name, LEARNING_VIDEOS_DESTINATION_PATH)
+        else:
+            # TODO 2. Also, remove directory after transfer
+
+            directory_exists(MOVIE_DESTINATION_PATH)
+            move(file_path, MOVIE_DESTINATION_PATH)
+            print "%s was moved to %s" % (file_name, MOVIE_DESTINATION_PATH)
 
 
-for sort_file in os.listdir(SORTING_DIRECTORY_PATH):
-    sort_file_path = os.path.join(SORTING_DIRECTORY_PATH, sort_file)
-    primary_sort(sort_file_path)
+def directory_exists(directory_path):
+    """Checks if directory exists. Creates it if test fails"""
+    if not os.path.isdir(directory_path):
+        os.makedirs(directory_path)
+        print "%s did not exist, so it was created" % (directory_path)
+
+
+def main():
+    """Main function"""
+    # Recursively sort SORTING_DIRECTORY_PATH
+    for sort_dir, dirs, files in os.walk(SORTING_DIRECTORY_PATH):
+        for file in files:
+            file_path = os.path.join(DOWNLOAD_DIRECTORY_PATH, sort_dir)
+            file_path = os.path.join(file_path, file)
+            primary_sort(file_path)
+main()
