@@ -1,7 +1,11 @@
-# """Sorts downloads folder"""
+"""Sorts downloads folder"""
 import os
 from shutil import move, rmtree
 DOWNLOAD_DIRECTORY_PATH = os.path.dirname(os.path.abspath(__file__))
+# Currently, file executes as if SORTING_DIRECTORY exists
+# in DOWNLOAD_DIRECTORY. Set sorting directory to dowload directory to
+# sort download directory path
+
 SORTING_DIRECTORY_PATH = os.path.join(DOWNLOAD_DIRECTORY_PATH, 'files_to_sort')
 MOVIE_DESTINATION_PATH = os.path.join(DOWNLOAD_DIRECTORY_PATH, 'Movies')
 TV_SHOW_DESTINATION_PATH = os.path.join(DOWNLOAD_DIRECTORY_PATH, 'TV Shows')
@@ -21,7 +25,7 @@ def primary_sort(file_path):
     if file_extension in ('.mpeg', '.mpg', '.avi', '.mov', '.qt', '.wmv', '.mp4', '.ogm', '.mkv'):
         # TODO 1. Possibly add something to differentiate between TV Shows and
         # Movies (if not Lynda.com files)
-        if (file_name.find("Lynda.com") != -1):
+        if file_name.find("Lynda.com") != -1:
             directory_exists(LEARNING_VIDEOS_DESTINATION_PATH)
             move(file_path, LEARNING_VIDEOS_DESTINATION_PATH)
             print "%s was moved to %s" % (file_name, LEARNING_VIDEOS_DESTINATION_PATH)
@@ -30,6 +34,7 @@ def primary_sort(file_path):
 
             directory_exists(MOVIE_DESTINATION_PATH)
             move(file_path, MOVIE_DESTINATION_PATH)
+            remove_dirtree(file_path)
             print "%s was moved to %s" % (file_name, MOVIE_DESTINATION_PATH)
 
 
@@ -48,4 +53,14 @@ def main():
             file_path = os.path.join(DOWNLOAD_DIRECTORY_PATH, sort_dir)
             file_path = os.path.join(file_path, file)
             primary_sort(file_path)
-main()
+
+def remove_dirtree(file_path):
+    """Removes parent dirtree for given file_path"""
+    len_sort_dir = len(SORTING_DIRECTORY_PATH)
+    print file_path
+    print file_path[len_sort_dir:]
+
+my_file_path = os.path.join(SORTING_DIRECTORY_PATH, 'mah_dir')
+my_file_path = os.path.join(my_file_path, 'show.mkv')
+remove_dirtree(my_file_path)
+
