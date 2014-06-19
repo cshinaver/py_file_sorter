@@ -47,12 +47,15 @@ def directory_exists(directory_path):
 
 def main():
     """Main function"""
+    print "Beginning file sort..."
     # Recursively sort SORTING_DIRECTORY_PATH
     for sort_dir, dirs, files in os.walk(SORTING_DIRECTORY_PATH):
+        print "Checking " + str(sort_dir)
         for file in files:
             file_path = os.path.join(DOWNLOAD_DIRECTORY_PATH, sort_dir)
             file_path = os.path.join(file_path, file)
             primary_sort(file_path)
+    print "Sorting Complete."
 
 def remove_dirtree(file_path):
     """Removes parent dirtree for given file_path"""
