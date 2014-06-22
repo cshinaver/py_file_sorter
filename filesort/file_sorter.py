@@ -15,7 +15,14 @@ LEARNING_VIDEOS_DESTINATION_PATH = os.path.join(
     'Learning Videos',
     )
 
-#TODO Write function that takes args like sort_downloads, sort_TV_Shows,sort_Movies
+
+class FileSort:
+    name = "test"
+
+#TODO Write function that takes args like sort_downloads,
+# sort_TV_Shows, sort_Movies
+
+
 def primary_sort(file_path):
     #TODO Add sorting for Other things that aren't videos
     """
