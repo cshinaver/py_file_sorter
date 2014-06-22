@@ -12,10 +12,11 @@ MOVIE_DESTINATION_PATH = os.path.join(DOWNLOAD_DIRECTORY_PATH, 'Movies')
 TV_SHOW_DESTINATION_PATH = os.path.join(DOWNLOAD_DIRECTORY_PATH, 'TV Shows')
 LEARNING_VIDEOS_DESTINATION_PATH = os.path.join(DOWNLOAD_DIRECTORY_PATH, 'Learning Videos')
 
-
+#TODO Write function that takes args like sort_downloads, sort_TV_Shows,sort_Movies
 def primary_sort(file_path):
+    #TODO Add sorting for Other things that aren't videos
     """
-    Determing file type and sorting
+    Sorts given filepath into Movies and Learning Videos
     """
     # Get file extension
     file_name = os.path.basename(file_path)
@@ -59,6 +60,7 @@ def main():
     print "Sorting Complete."
 
 def remove_dirtree(file_path):
+    #TODO Finish this function
     """Removes parent dirtree for given file_path"""
     len_sort_dir = len(SORTING_DIRECTORY_PATH)
     print file_path
