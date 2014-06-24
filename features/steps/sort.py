@@ -14,11 +14,14 @@ Feature: Download_Sorter (Natural Language)
 """
 from behave import *  # noqa
 from filesort.file_sorter import FileSort
+import tempfile
 
 
 @given('a sort path')
 def step_a_sort_path(context):
-    assert 2 == 3
+
+    print("Created test_dir at {0}".format(x))
+    
 
 
 @given('a movie path')
@@ -34,3 +37,33 @@ def step_file_is_movie(context):
 @then('the file should be moved to the Movie Folder')
 def step_file_moved(context):
     assert False
+
+@given('a Lynda path')
+def step_impl(context):
+    assert False
+
+@when('the file is a Lynda movie')
+def step_impl(context):
+    assert False
+
+@then('the file should be moved to the Lynda Folder')
+def step_impl(context):
+    assert False
+
+@given('a TV Show path')
+def step_impl(context):
+    assert False
+
+@when('the file is a movie file')
+def step_impl(context):
+    assert False
+
+@when('it is smaller than 400MB')
+def step_impl(context):
+    assert False
+
+@then('the file should be moved to the TV Shows Folder')
+def step_impl(context):
+    assert False
+
+
