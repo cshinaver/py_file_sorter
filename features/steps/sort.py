@@ -32,7 +32,11 @@ def step_a_movie_path(context):
 
 @when('the file is a movie')
 def step_file_is_movie(context):
-    assert False
+    temp_mov_file = tempfile.NamedTemporaryFile(
+            mode='w+b',
+            suffix='mov',
+            dir=temp_sort_dir_path,
+            )
 
 
 @then('the file should be moved to the Movie Folder')
