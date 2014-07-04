@@ -19,15 +19,15 @@ import tempfile
 
 @given('a sort path')
 def step_a_sort_path(context):
-
-    print("Created test_dir at {0}".format(x))
+    tmp_sort_dir_path = tempfile.mkdtemp(prefix='tmp_sort_dir', dir='.')
+    print("Created test_dir at {0}".format(tmp_sort_dir_path))
     
 
 
 @given('a movie path')
 def step_a_movie_path(context):
-    assert False
-
+    tmp_movie_dir_path = tempfile.mkdtemp(dir='.')
+    print("Created test_dir at {0}".format(tmp_movie_dir_path))
 
 @when('the file is a movie')
 def step_file_is_movie(context):
