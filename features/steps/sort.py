@@ -15,6 +15,7 @@ Feature: Download_Sorter (Natural Language)
 from behave import *  # noqa
 from filesort.file_sorter import FileSort
 import tempfile
+#TODO Figure out behave setup and teardown for temp files
 
 
 @given('a sort path')
