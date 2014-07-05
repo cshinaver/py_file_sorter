@@ -36,7 +36,7 @@ def step_file_is_movie(context):
         delete=False,
         dir=context.tmp_sort_dir_path,
         )
-    assert exists(str(context.tmp_mov_file.name))
+    assert exists(context.tmp_mov_file.name)
 
 
 @then('the file should be moved to the Movie Folder')
