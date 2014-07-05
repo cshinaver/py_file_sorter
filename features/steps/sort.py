@@ -21,12 +21,12 @@ from os import path
 
 @given('a sort path')
 def step_a_sort_path(context):
-    assert isdir(context.tmp_sort_dir_path)
+    assert isdir(context.file_sorter.sort_dir)
 
 
 @given('a movie path')
 def step_a_movie_path(context):
-    assert isdir(context.tmp_movie_dir_path)
+    assert isdir(context.file_sorter.movie_dir)
 
 
 @when('the file is a movie')
@@ -35,18 +35,18 @@ def step_file_is_movie(context):
         mode='w+b',
         suffix='.mov',
         delete=False,
-        dir=context.tmp_sort_dir_path,
+        dir=context.file_sorter.sort_dir,
         )
     assert exists(context.tmp_movie_file.name)
 
 
 @then('the file should be moved to the Movie Folder')
 def step_file_moved(context):
-    main_sorter(context.tmp_sort_dir_path, context.tmp_movie_dir_path)
+    main_sorter()
 
     # Test
     file_name = path.basename(context.tmp_movie_file.name)
-    new_file_name = path.join(context.tmp_movie_dir_path, file_name)
+    new_file_name = path.join(context.file_sorter.movie_dir, file_name)
     assert exists(new_file_name)
 
 
