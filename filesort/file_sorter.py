@@ -90,5 +90,5 @@ def remove_dirtree(file_path):
 # my_file_path = os.path.join(SORTING_DIRECTORY_PATH, 'mah_dir')
 # my_file_path = os.path.join(my_file_path, 'show.mkv')
 # remove_dirtree(my_file_path)
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
