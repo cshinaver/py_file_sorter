@@ -15,14 +15,13 @@ Feature: Download_Sorter (Natural Language)
 from behave import *  # noqa
 from filesort.file_sorter import FileSort
 import tempfile
+from os.path import isdir
 #TODO Figure out behave setup and teardown for temp files
 
 
 @given('a sort path')
 def step_a_sort_path(context):
-    tmp_sort_dir_path = tempfile.mkdtemp(prefix='tmp_sort_dir', dir='.')
-    print("Created test_dir at {0}".format(tmp_sort_dir_path))
-    
+    assert isdir(context.tmp_sort_dir_path)
 
 
 @given('a movie path')
