@@ -32,7 +32,7 @@ def step_a_movie_path(context):
 def step_file_is_movie(context):
     context.tmp_mov_file = tempfile.NamedTemporaryFile(
         mode='w+b',
-        suffix='mov',
+        suffix='.mov',
         delete=False,
         dir=context.tmp_sort_dir_path,
         )
