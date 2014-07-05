@@ -8,7 +8,6 @@ def before_all(context):
     # Make tmp_files dir
     context.tmp_files_dir = tempfile.mkdtemp(
         prefix='tmp_files',
-        dir='.',
         )
     print("Created tmp_files dir at {0}".format(context.tmp_files_dir))
 
