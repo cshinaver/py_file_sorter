@@ -45,7 +45,7 @@ class FileSort:
                     file_name,
                     self.lynda_dir,
                     ))
-            if "Lynda" in file_name and not self.lynda_dir:
+            elif "Lynda" in file_name and not self.lynda_dir:
                 return
             else:
                 # TODO 2. Also, remove directory after transfer
