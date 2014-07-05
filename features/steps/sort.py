@@ -20,16 +20,34 @@ from os import path
 
 @given('a sort path')
 def step_a_sort_path(context):
+    # Make sort dir
+    context.file_sorter.sort_dir = tempfile.mkdtemp(
+        prefix='tmp_sort_dir',
+        dir=context.tmp_files_dir,
+        )
+    print("Created test_dir at {0}".format(context.file_sorter.sort_dir))
     assert isdir(context.file_sorter.sort_dir)
 
 
 @given('a movie path')
 def step_a_movie_path(context):
+    # Make movie_dir
+    context.file_sorter.movie_dir = tempfile.mkdtemp(
+        prefix='tmp_movie_dir',
+        dir=context.tmp_files_dir,
+        )
+    print("Created movie_dir at {0}".format(context.file_sorter.movie_dir))
     assert isdir(context.file_sorter.movie_dir)
 
 
 @given('a Lynda path')
 def step_a_lynda_path(context):
+    # Make lynda movie_dir
+    context.file_sorter.lynda_dir = tempfile.mkdtemp(
+        prefix='tmp_lynda_dir',
+        dir=context.tmp_files_dir,
+        )
+    print("Created movie_dir at {0}".format(context.file_sorter.lynda_dir))
     assert isdir(context.file_sorter.lynda_dir)
 
 
@@ -70,8 +88,10 @@ def step_music_file_given(context):
 
 @when(u'only a movie path is given')
 def step_only_movie_path_given(context):
+    context.file_sorter.lynda_dir = ''
     fs = context.file_sorter
-    assert any([
+
+    assert not any([
         fs.lynda_dir,
         fs.music_dir,
         fs.app_dir,
