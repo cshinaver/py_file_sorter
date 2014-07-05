@@ -48,12 +48,12 @@ class FileSort:
             # TODO 1. Possibly add something to differentiate between
             # TV Shows and
             # Movies (if not Lynda.com files)
-            if file_name.find("Lynda.com") != -1:
-                self.directory_exists(LEARNING_VIDEOS_DESTINATION_PATH)
-                move(file_path, LEARNING_VIDEOS_DESTINATION_PATH)
+            if file_name.find("Lynda") != -1:
+                self.directory_exists(self.lynda_dir)
+                move(file_path, self.lynda_dir)
                 print('{0} was moved to {1}'.format(
                     file_name,
-                    LEARNING_VIDEOS_DESTINATION_PATH,
+                    self.lynda_dir,
                     ))
             else:
                 # TODO 2. Also, remove directory after transfer
