@@ -15,11 +15,6 @@ LEARNING_VIDEOS_DESTINATION_PATH = os.path.join(
     'Learning Videos',
     )
 
-
-class FileSort:
-    sort_dir = ''
-    movie_dir = ''
-
 #TODO Write function that takes args like sort_downloads,
 # sort_TV_Shows, sort_Movies
 
