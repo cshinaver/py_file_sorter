@@ -13,9 +13,10 @@ Feature: Download_Sorter (Natural Language)
         Then the file should be moved to the Movie Folder
 """
 from behave import *  # noqa
-from filesort.file_sorter import FileSort
+from filesort.file_sorter import primary_sort
 import tempfile
 from os.path import isdir, exists
+from os import path
 
 
 @given('a sort path')
@@ -30,50 +31,55 @@ def step_a_movie_path(context):
 
 @when('the file is a movie')
 def step_file_is_movie(context):
-    context.tmp_mov_file = tempfile.NamedTemporaryFile(
+    context.tmp_movie_file = tempfile.NamedTemporaryFile(
         mode='w+b',
         suffix='.mov',
         delete=False,
         dir=context.tmp_sort_dir_path,
         )
-    assert exists(context.tmp_mov_file.name)
+    assert exists(context.tmp_movie_file.name)
 
 
 @then('the file should be moved to the Movie Folder')
 def step_file_moved(context):
-    assert False
+    primary_sort(context.tmp_sort_dir_path)
+
+    # Test
+    file_name = path.basename(context.tmp_movie_file.name)
+    new_file_name = path.join(context.tmp_movie_dir_path, file_name)
+    assert exists(new_file_name)
 
 
-@given('a Lynda path')
-def step_impl(context):
-    assert False
+# @given('a Lynda path')
+# def step_impl(context):
+#     assert False
 
 
-@when('the file is a Lynda movie')
-def step_impl(context):
-    assert False
+# @when('the file is a Lynda movie')
+# def step_impl(context):
+#     assert False
 
 
-@then('the file should be moved to the Lynda Folder')
-def step_impl(context):
-    assert False
+# @then('the file should be moved to the Lynda Folder')
+# def step_impl(context):
+#     assert False
 
 
-@given('a TV Show path')
-def step_impl(context):
-    assert False
+# @given('a TV Show path')
+# def step_impl(context):
+#     assert False
 
 
-@when('the file is a movie file')
-def step_impl(context):
-    assert False
+# @when('the file is a movie file')
+# def step_impl(context):
+#     assert False
 
 
-@when('it is smaller than 400MB')
-def step_impl(context):
-    assert False
+# @when('it is smaller than 400MB')
+# def step_impl(context):
+#     assert False
 
 
-@then('the file should be moved to the TV Shows Folder')
-def step_impl(context):
-    assert False
+# @then('the file should be moved to the TV Shows Folder')
+# def step_impl(context):
+#     assert False
