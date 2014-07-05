@@ -38,13 +38,15 @@ class FileSort:
             # TODO 1. Possibly add something to differentiate between
             # TV Shows and
             # Movies (if not Lynda.com files)
-            if "Lynda" in file_name:
+            if "Lynda" in file_name and self.lynda_dir:
                 self.directory_exists(self.lynda_dir)
                 move(file_path, self.lynda_dir)
                 print('{0} was moved to {1}'.format(
                     file_name,
                     self.lynda_dir,
                     ))
+            if "Lynda" in file_name and not self.lynda_dir:
+                return
             else:
                 # TODO 2. Also, remove directory after transfer
 
