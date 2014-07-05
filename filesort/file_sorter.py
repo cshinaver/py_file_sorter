@@ -19,7 +19,7 @@ LEARNING_VIDEOS_DESTINATION_PATH = os.path.join(
 # sort_TV_Shows, sort_Movies
 
 
-def primary_sort(file_path):
+def primary_sort(file_path, movie_dir_path):
     #TODO Add sorting for Other things that aren't videos
     """
     Sorts given filepath into Movies and Learning Videos
@@ -52,12 +52,12 @@ def primary_sort(file_path):
         else:
             # TODO 2. Also, remove directory after transfer
 
-            directory_exists(MOVIE_DESTINATION_PATH)
-            move(file_path, MOVIE_DESTINATION_PATH)
+            directory_exists(movie_dir_path)
+            move(file_path, movie_dir_path)
             remove_dirtree(file_path)
             print('{0} was moved to {1}'.format(
                 file_name,
-                MOVIE_DESTINATION_PATH,
+                movie_dir_path,
                 ))
 
 
@@ -68,16 +68,15 @@ def directory_exists(directory_path):
         print('{0} did not exist, so it was created'.format(directory_path))
 
 
-def main():
+def main_sorter(sort_dir_path, movie_dir_path):
     """Main function"""
     print("Beginning file sort...")
     # Recursively sort SORTING_DIRECTORY_PATH
-    for sort_dir, dirs, files in os.walk(SORTING_DIRECTORY_PATH):
+    for sort_dir, dirs, files in os.walk(sort_dir_path):
         print("Checking " + str(sort_dir))
         for file in files:
-            file_path = os.path.join(DOWNLOAD_DIRECTORY_PATH, sort_dir)
-            file_path = os.path.join(file_path, file)
-            primary_sort(file_path)
+            file_path = os.path.join(sort_dir_path, file)
+            primary_sort(file_path, movie_dir_path)
     print("Sorting Complete.")
 
 
