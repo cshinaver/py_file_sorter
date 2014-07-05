@@ -16,7 +16,6 @@ from behave import *  # noqa
 from filesort.file_sorter import FileSort
 import tempfile
 from os.path import isdir
-#TODO Figure out behave setup and teardown for temp files
 
 
 @given('a sort path')
@@ -26,16 +25,16 @@ def step_a_sort_path(context):
 
 @given('a movie path')
 def step_a_movie_path(context):
-    tmp_movie_dir_path = tempfile.mkdtemp(dir='.')
-    print("Created test_dir at {0}".format(tmp_movie_dir_path))
+    assert isdir(context.tmp_movie_dir_path)
+
 
 @when('the file is a movie')
 def step_file_is_movie(context):
-    temp_mov_file = tempfile.NamedTemporaryFile(
-            mode='w+b',
-            suffix='mov',
-            dir=temp_sort_dir_path,
-            )
+    context.temp_mov_file = tempfile.NamedTemporaryFile(
+        mode='w+b',
+        suffix='mov',
+        dir=context.temp_sort_dir_path,
+        )
 
 
 @then('the file should be moved to the Movie Folder')
