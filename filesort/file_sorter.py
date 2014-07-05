@@ -21,6 +21,8 @@ class FileSort:
     movie_dir = ''
     tv_show_dir = ''
     lynda_dir = ''
+    music_dir = ''
+    app_dir = ''
 
     #TODO Write function that takes args like sort_downloads,
     # sort_TV_Shows, sort_Movies
