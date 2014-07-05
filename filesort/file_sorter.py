@@ -2,18 +2,6 @@
 """Sorts downloads folder"""
 import os
 from shutil import move, rmtree
-DOWNLOAD_DIRECTORY_PATH = os.path.dirname(os.path.abspath(__file__))
-# Currently, file executes as if SORTING_DIRECTORY exists
-# in DOWNLOAD_DIRECTORY. Set sorting directory to dowload directory to
-# sort download directory path
-
-SORTING_DIRECTORY_PATH = os.path.join(DOWNLOAD_DIRECTORY_PATH, 'files_to_sort')
-MOVIE_DESTINATION_PATH = os.path.join(DOWNLOAD_DIRECTORY_PATH, 'Movies')
-TV_SHOW_DESTINATION_PATH = os.path.join(DOWNLOAD_DIRECTORY_PATH, 'TV Shows')
-LEARNING_VIDEOS_DESTINATION_PATH = os.path.join(
-    DOWNLOAD_DIRECTORY_PATH,
-    'Learning Videos',
-    )
 
 
 class FileSort:
