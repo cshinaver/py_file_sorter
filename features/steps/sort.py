@@ -13,7 +13,6 @@ Feature: Download_Sorter (Natural Language)
         Then the file should be moved to the Movie Folder
 """
 from behave import *  # noqa
-from filesort.file_sorter import main_sorter
 import tempfile
 from os.path import isdir, exists
 from os import path
@@ -42,7 +41,7 @@ def step_file_is_movie(context):
 
 @then('the file should be moved to the Movie Folder')
 def step_file_moved(context):
-    main_sorter()
+    context.file_sorter.main_sorter()
 
     # Test
     file_name = path.basename(context.tmp_movie_file.name)
