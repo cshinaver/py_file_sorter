@@ -47,7 +47,7 @@ def step_a_lynda_path(context):
         prefix='tmp_lynda_dir',
         dir=context.tmp_files_dir,
         )
-    print("Created movie_dir at {0}".format(context.file_sorter.lynda_dir))
+    print("Created lynda_movie_dir at {0}".format(context.file_sorter.lynda_dir))
     assert isdir(context.file_sorter.lynda_dir)
 
 
@@ -111,7 +111,7 @@ def step_Lynda_movie_file_not_moved(context):
 
 @then(u'the music file should not be moved')
 def step_music_file_not_moved(context):
-    assert False
+    assert exists(context.tmp_music_file.name)
 
 
 @then('the movie file should be moved to the Movie Folder')
