@@ -15,7 +15,7 @@ Feature: Download_Sorter (Natural Language)
 from behave import *  # noqa
 from filesort.file_sorter import FileSort
 import tempfile
-from os.path import isdir
+from os.path import isdir, exists
 
 
 @given('a sort path')
@@ -30,11 +30,13 @@ def step_a_movie_path(context):
 
 @when('the file is a movie')
 def step_file_is_movie(context):
-    context.temp_mov_file = tempfile.NamedTemporaryFile(
+    context.tmp_mov_file = tempfile.NamedTemporaryFile(
         mode='w+b',
         suffix='mov',
-        dir=context.temp_sort_dir_path,
+        delete=False,
+        dir=context.tmp_sort_dir_path,
         )
+    assert exists(str(context.tmp_mov_file.name))
 
 
 @then('the file should be moved to the Movie Folder')

@@ -1,5 +1,6 @@
 import tempfile
 from os import rmdir
+from shutil import rmtree
 
 
 def before_all(context):
@@ -16,5 +17,5 @@ def before_all(context):
 
 
 def after_all(context):
-    rmdir(context.tmp_sort_dir_path)
-    rmdir(context.tmp_movie_dir_path)
+    rmtree(context.tmp_sort_dir_path)
+    rmtree(context.tmp_movie_dir_path)
