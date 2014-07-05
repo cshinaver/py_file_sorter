@@ -18,9 +18,14 @@ def before_all(context):
     file_sorter.movie_dir = tempfile.mkdtemp(dir='.')
     print("Created movie_dir at {0}".format(file_sorter.movie_dir))
 
+    # Make movie_dir
+    file_sorter.lynda_dir = tempfile.mkdtemp(dir='.')
+    print("Created movie_dir at {0}".format(file_sorter.lynda_dir))
+
     context.file_sorter = file_sorter
 
 
 def after_all(context):
     rmtree(context.file_sorter.sort_dir)
     rmtree(context.file_sorter.movie_dir)
+    rmtree(context.file_sorter.lynda_dir)

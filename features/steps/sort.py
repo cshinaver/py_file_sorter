@@ -49,20 +49,31 @@ def step_file_moved(context):
     assert exists(new_file_name)
 
 
-# @given('a Lynda path')
-# def step_impl(context):
-#     assert False
+@given('a Lynda path')
+def step_a_lynda_path(context):
+    assert isdir(context.file_sorter.lynda_dir)
 
 
-# @when('the file is a Lynda movie')
-# def step_impl(context):
-#     assert False
+@when('the file is a Lynda movie')
+def step_a_lynda_movie(context):
+    context.tmp_movie_file = tempfile.NamedTemporaryFile(
+        mode='w+b',
+        prefix='Lynda.com',
+        suffix='.mov',
+        delete=False,
+        dir=context.file_sorter.sort_dir,
+        )
+    assert exists(context.tmp_movie_file.name)
 
 
-# @then('the file should be moved to the Lynda Folder')
-# def step_impl(context):
-#     assert False
+@then('the file should be moved to the Lynda Folder')
+def step_impl(context):
+    context.file_sorter.main_sorter()
 
+    # Test
+    file_name = path.basename(context.tmp_movie_file.name)
+    new_file_name = path.join(context.file_sorter.lynda_dir, file_name)
+    assert exists(new_file_name)
 
 # @given('a TV Show path')
 # def step_impl(context):
