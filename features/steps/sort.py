@@ -16,6 +16,7 @@ from behave import *  # noqa
 import tempfile
 from os.path import isdir, exists
 from os import path
+from filesort.file_sorter import parse_args
 
 
 @given(u'a sort path argument')
@@ -130,7 +131,9 @@ def step_sorter_start(context):
 
 @when(u'the sorter is started with arguments')
 def step_sorter_started_with_arguments(context):
-    assert False
+    args = parse_args(context.args)
+    file_sorter = FileSort(args)
+    file_sorter.main_sorter()
 
 
 @then(u'the Lynda movie should not be moved')
