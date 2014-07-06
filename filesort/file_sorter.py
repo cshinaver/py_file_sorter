@@ -15,7 +15,7 @@ class FileSort:
 
     def __init__(self, args):
         # Make list of dir arguments
-        arg_attrs = [
+        directory_arguments = [
             attr for attr in dir(args)
             if 'dir' in attr and
             isinstance(
@@ -24,9 +24,11 @@ class FileSort:
                     attr
                     ),
                 str)]
-        for attr in arg_attrs:
-            attr_value = getattr(args, attr)
-            setattr(self, attr, attr_value)
+
+        # Set dir properties for given dir arguments
+        for directory in directory_arguments:
+            directory_location = getattr(args, directory)
+            setattr(self, directory, directory_location)
 
 
     #TODO Write function that takes args like sort_downloads,
