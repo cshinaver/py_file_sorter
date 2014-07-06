@@ -13,6 +13,22 @@ class FileSort:
     music_dir = ''
     app_dir = ''
 
+    def __init__(self, args):
+        # Make list of dir arguments
+        arg_attrs = [
+            attr for attr in dir(args)
+            if 'dir' in attr and
+            isinstance(
+                getattr(
+                    self,
+                    attr
+                    ),
+                str)]
+        for attr in arg_attrs:
+            attr_value = getattr(args, attr)
+            setattr(self, attr, attr_value)
+
+
     #TODO Write function that takes args like sort_downloads,
     # sort_TV_Shows, sort_Movies
     def primary_sort(self, file_path):
