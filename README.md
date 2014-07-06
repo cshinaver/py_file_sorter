@@ -4,3 +4,8 @@ py_file_sorter
    
 Sorts Downloads in a given directory into given paths
 
+
+TODO:
+* Remove TODOs in code
+* Add TV Show differentiation
+* Finish rmdirtree function
