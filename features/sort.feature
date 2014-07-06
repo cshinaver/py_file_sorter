@@ -31,6 +31,14 @@ Feature: Download_Sorter (Natural Language)
         And the Lynda movie should not be moved 
         And the music file should not be moved
 
+    Scenario: Test input
+        Given a sort path argument
+        And a movie path argument
+        And a movie file
+        When the sorter is started
+        Then the movie file should be moved to the Movie Folder
+
+
     # Scenario: TV Show
     #     Given a sort path
     #     And a TV Show path
