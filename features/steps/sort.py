@@ -18,6 +18,23 @@ from os.path import isdir, exists
 from os import path
 
 
+@given(u'a sort path argument')
+def step_sort_path_argument_given(context):
+    sort_dir = context.file_sorter.sort_dir
+
+    if not hasattr(context, 'args'):
+        context.args = [sort_dir]
+    elif hasattr(context, 'args'):
+        context.args.append(sort_dir)
+    assert sort_dir in context.args 
+
+
+
+@given(u'a movie path argument')
+def step_movie_path_argument_given(context):
+    assert False
+
+
 @given('a sort path')
 def step_a_sort_path(context):
     # Make sort dir
@@ -102,6 +119,11 @@ def step_only_movie_path_given(context):
 @when(u'the sorter is started')
 def step_sorter_start(context):
     context.file_sorter.main_sorter()
+
+
+@when(u'the sorter is started with arguments')
+def step_sorter_started_with_arguments(context):
+    assert False
 
 
 @then(u'the Lynda movie should not be moved')
