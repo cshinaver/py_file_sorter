@@ -4,7 +4,8 @@ from filesort.file_sorter import FileSort
 
 
 def before_all(context):
-    file_sorter = FileSort()
+    args = []
+    file_sorter = FileSort(args)
     # Make tmp_files dir
     context.tmp_files_dir = tempfile.mkdtemp(
         prefix='tmp_files',
