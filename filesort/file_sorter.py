@@ -2,6 +2,7 @@
 """Sorts downloads folder"""
 import os
 from shutil import move, rmtree
+import argparse
 
 
 class FileSort:
@@ -87,5 +88,29 @@ class FileSort:
     # my_file_path = os.path.join(SORTING_DIRECTORY_PATH, 'mah_dir')
     # my_file_path = os.path.join(my_file_path, 'show.mkv')
     # remove_dirtree(my_file_path)
-    # if __name__ == "__main__":
-    #     main()
+
+
+def parse_args(args):
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '--sort-dir',
+        dest='sort_dir',
+        help='String to sort dir',
+        )
+    parser.add_argument(
+        '--movie-dir',
+        dest='movie_dir',
+        help='String to movie dir',
+        )
+
+    return parser.parse_args(args)
+
+
+def main():
+    args = parse_args()
+    file_sorter = FileSort(args)
+    file_sorter.main_sorter()
+
+
+if __name__ == "__main__":
+    main()
