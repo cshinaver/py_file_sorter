@@ -32,7 +32,9 @@ Feature: Download_Sorter (Natural Language)
         And the music file should not be moved
 
     Scenario: Test input
-        Given a sort path argument
+        Given a sort path
+        And a sort path argument
+        And a movie path
         And a movie path argument
         And a movie file
         When the sorter is started with arguments
