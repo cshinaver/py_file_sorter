@@ -35,7 +35,7 @@ Feature: Download_Sorter (Natural Language)
         Given a sort path argument
         And a movie path argument
         And a movie file
-        When the sorter is started
+        When the sorter is started with arguments
         Then the movie file should be moved to the Movie Folder
 
 
