@@ -16,28 +16,30 @@ from behave import *  # noqa
 import tempfile
 from os.path import isdir, exists
 from os import path
-from filesort.file_sorter import parse_args
+from filesort.file_sorter import FileSort, parse_args
 
 
 @given(u'a sort path argument')
 def step_sort_path_argument_given(context):
     sort_dir = context.file_sorter.sort_dir
+    args = ['--sort-dir', sort_dir]
 
     if not hasattr(context, 'args'):
-        context.args = [sort_dir]
+        context.args = args
     elif hasattr(context, 'args'):
-        context.args.append(sort_dir)
+        context.args.extend(args)
     assert sort_dir in context.args
 
 
 @given(u'a movie path argument')
 def step_movie_path_argument_given(context):
     movie_dir = context.file_sorter.movie_dir
+    args = ['--movie-dir', movie_dir]
 
     if not hasattr(context, 'args'):
-        context.args = [movie_dir]
+        context.args = args
     elif hasattr(context, 'args'):
-        context.args.append(movie_dir)
+        context.args.extend(args)
     assert movie_dir in context.args
 
 
