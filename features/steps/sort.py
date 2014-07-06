@@ -26,13 +26,18 @@ def step_sort_path_argument_given(context):
         context.args = [sort_dir]
     elif hasattr(context, 'args'):
         context.args.append(sort_dir)
-    assert sort_dir in context.args 
-
+    assert sort_dir in context.args
 
 
 @given(u'a movie path argument')
 def step_movie_path_argument_given(context):
-    assert False
+    movie_dir = context.file_sorter.movie_dir
+
+    if not hasattr(context, 'args'):
+        context.args = [movie_dir]
+    elif hasattr(context, 'args'):
+        context.args.append(movie_dir)
+    assert movie_dir in context.args
 
 
 @given('a sort path')
@@ -64,7 +69,9 @@ def step_a_lynda_path(context):
         prefix='tmp_lynda_dir',
         dir=context.tmp_files_dir,
         )
-    print("Created lynda_movie_dir at {0}".format(context.file_sorter.lynda_dir))
+    print("Created lynda_movie_dir at {0}".format(
+        context.file_sorter.lynda_dir
+        ))
     assert isdir(context.file_sorter.lynda_dir)
 
 
