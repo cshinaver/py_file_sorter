@@ -19,6 +19,29 @@ from os import path
 from filesort.file_sorter import FileSort, parse_args
 
 
+@given(u'a subdirectory')
+def step_given_a_subdirectory(context):
+    # Make sub_dir
+    context.file_sorter.sub_dir = tempfile.mkdtemp(
+        prefix='tmp_sub_dir',
+        dir=context.tmp_files_dir,
+        )
+    print("Created sub_dir at {0}".format(context.file_sorter.sub_dir))
+    assert isdir(context.file_sorter.sub_dir)
+
+
+@given(u'a movie file in the subdirectory')
+def step_movie_file_in_sub_dir(context):
+    # Create movie file in subdirectory
+    context.tmp_movie_file = tempfile.NamedTemporaryFile(
+        mode='w+b',
+        suffix='.mov',
+        delete=False,
+        dir=context.file_sorter.sub_dir,
+        )
+    assert exists(context.tmp_movie_file.name)
+
+
 @given(u'a sort path argument')
 def step_sort_path_argument_given(context):
     sort_dir = context.file_sorter.sort_dir
