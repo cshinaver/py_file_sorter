@@ -275,4 +275,4 @@ def step_two_movie_files_moved(context):
 
 @then(u'the subdirectory should be deleted')
 def step_is_subdirectory_deleted(context):
-    assert False
+    assert not exists(context.sub_dir)
