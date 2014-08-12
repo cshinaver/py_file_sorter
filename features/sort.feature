@@ -40,6 +40,17 @@ Feature: Download_Sorter (Natural Language)
         When the sorter is started with arguments
         Then the movie file should be moved to the Movie Folder
 
+    Scenario: Movie Folder
+        Given a sort path
+        And a movie path
+        And a subdirectory
+        And two movie files in the subdirectory
+        And a text file in the subdirectory
+        And a subdirectory in the subdirectory
+        And an image file in the second subdirectory
+        Then two movie files should be moved to the Movie Folder
+        And the subdirectory should be deleted
+
 
     # Scenario: TV Show
     #     Given a sort path
