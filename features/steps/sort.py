@@ -19,6 +19,48 @@ from os import path
 from filesort.file_sorter import FileSort, parse_args
 
 
+@given(u'two movie files')
+def step_given_two_movie_files(context):
+    context.first_tmp_movie_file = tempfile.NamedTemporaryFile(
+        mode='w+b',
+        suffix='.mov',
+        delete=False,
+        dir=context.file_sorter.sort_dir,
+        )
+    assert exists(context.first_tmp_movie_file.name)
+
+    context.second_tmp_movie_file = tempfile.NamedTemporaryFile(
+        mode='w+b',
+        suffix='.mov',
+        delete=False,
+        dir=context.file_sorter.sort_dir,
+        )
+    assert exists(context.second_tmp_movie_file.name)
+
+
+@given(u'a subdirectory')
+def step_given_a_subdirectory(context):
+    # Make sub_dir
+    context.sub_dir = tempfile.mkdtemp(
+        prefix='tmp_sub_dir',
+        dir=context.file_sorter.sort_dir,
+        )
+    print("Created sub_dir at {0}".format(context.sub_dir))
+    assert isdir(context.sub_dir)
+
+
+@given(u'a movie file in the subdirectory')
+def step_movie_file_in_sub_dir(context):
+    # Create movie file in subdirectory
+    context.tmp_movie_file = tempfile.NamedTemporaryFile(
+        mode='w+b',
+        suffix='.mov',
+        delete=False,
+        dir=context.sub_dir,
+        )
+    assert exists(context.tmp_movie_file.name)
+
+
 @given(u'a sort path argument')
 def step_sort_path_argument_given(context):
     sort_dir = context.file_sorter.sort_dir
@@ -161,4 +203,17 @@ def step_lynda_file_moved(context):
     # Test
     file_name = path.basename(context.tmp_lynda_movie_file.name)
     new_file_name = path.join(context.file_sorter.lynda_dir, file_name)
+    assert exists(new_file_name)
+
+
+@then(u'two movie files should be moved to the Movie Folder')
+def step_two_movie_files_moved(context):
+    # First movie file
+    file_name = path.basename(context.first_tmp_movie_file.name)
+    new_file_name = path.join(context.file_sorter.movie_dir, file_name)
+    assert exists(new_file_name)
+
+    # Second movie file
+    file_name = path.basename(context.second_tmp_movie_file.name)
+    new_file_name = path.join(context.file_sorter.movie_dir, file_name)
     assert exists(new_file_name)

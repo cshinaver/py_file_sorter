@@ -51,6 +51,31 @@ Feature: Download_Sorter (Natural Language)
         Then two movie files should be moved to the Movie Folder
         And the subdirectory should be deleted
 
+    Scenario: Multiple Movies
+        Given a sort path
+        And a movie path
+        And two movie files
+        When the sorter is started
+        Then two movie files should be moved to the Movie Folder
+
+    Scenario: Subdirectories
+        Given a sort path
+        And a subdirectory
+        And a movie file in the subdirectory
+        And a movie path
+        When the sorter is started
+        Then the movie file should be moved to the Movie Folder
+
+    Scenario: Movie Folder
+        Given a sort path
+        And a movie path
+        And a subdirectory
+        And two movie files in the subdirectory
+        And a text file in the subdirectory
+        And a subdirectory in the subdirectory
+        And an image file in the second subdirectory
+        Then two movie files should be moved to the Movie Folder
+        And the subdirectory should be deleted
 
     # Scenario: TV Show
     #     Given a sort path

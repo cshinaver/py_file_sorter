@@ -92,7 +92,7 @@ class FileSort:
         for sort_dir, dirs, files in os.walk(self.sort_dir):
             print("Checking " + str(sort_dir))
             for file in files:
-                file_path = os.path.join(self.sort_dir, file)
+                file_path = os.path.join(sort_dir, file)
                 self.primary_sort(file_path)
         print("Sorting Complete.")
 
