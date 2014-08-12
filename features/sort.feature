@@ -40,6 +40,12 @@ Feature: Download_Sorter (Natural Language)
         When the sorter is started with arguments
         Then the movie file should be moved to the Movie Folder
 
+    Scenario: Multiple Movies
+        Given a sort path
+        And a movie path
+        And two movie files
+        When the sorter is started
+        Then two movie files should be moved to the Movie Folder
 
     # Scenario: TV Show
     #     Given a sort path
