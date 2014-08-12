@@ -19,6 +19,59 @@ from os import path
 from filesort.file_sorter import FileSort, parse_args
 
 
+@given(u'a subdirectory')
+def step_given_a_subdirectory(context):
+    # Make sub_dir
+    context.sub_dir = tempfile.mkdtemp(
+        prefix='tmp_sub_dir',
+        dir=context.file_sorter.sort_dir,
+        )
+    print("Created sub_dir at {0}".format(context.sub_dir))
+    assert isdir(context.sub_dir)
+
+
+@given(u'a subdirectory in the subdirectory')
+def step_given_a_subdirectory_in_the_subdirectory(context):
+    # Make second sub_dir
+    context.second_sub_dir = tempfile.mkdtemp(
+        prefix='tmp_second_sub_dir',
+        dir=context.sub_dir,
+        )
+    print("Created second_sub_dir at {0}".format(context.second_sub_dir))
+    assert isdir(context.second_sub_dir)
+
+
+@given(u'a movie file in the subdirectory')
+def step_movie_file_in_sub_dir(context):
+    # Create movie file in subdirectory
+    context.tmp_movie_file = tempfile.NamedTemporaryFile(
+        mode='w+b',
+        suffix='.mov',
+        delete=False,
+        dir=context.sub_dir,
+        )
+    assert exists(context.tmp_movie_file.name)
+
+
+@given(u'two movie files in the subdirectory')
+def step_given_two_movie_files_in_the_subdirectory(context):
+    context.first_tmp_movie_file = tempfile.NamedTemporaryFile(
+        mode='w+b',
+        suffix='.mov',
+        delete=False,
+        dir=context.sub_dir,
+        )
+    assert exists(context.first_tmp_movie_file.name)
+
+    context.second_tmp_movie_file = tempfile.NamedTemporaryFile(
+        mode='w+b',
+        suffix='.mov',
+        delete=False,
+        dir=context.sub_dir,
+        )
+    assert exists(context.second_tmp_movie_file.name)
+
+
 @given(u'two movie files')
 def step_given_two_movie_files(context):
     context.first_tmp_movie_file = tempfile.NamedTemporaryFile(
@@ -38,27 +91,28 @@ def step_given_two_movie_files(context):
     assert exists(context.second_tmp_movie_file.name)
 
 
-@given(u'a subdirectory')
-def step_given_a_subdirectory(context):
-    # Make sub_dir
-    context.sub_dir = tempfile.mkdtemp(
-        prefix='tmp_sub_dir',
-        dir=context.file_sorter.sort_dir,
-        )
-    print("Created sub_dir at {0}".format(context.sub_dir))
-    assert isdir(context.sub_dir)
-
-
-@given(u'a movie file in the subdirectory')
-def step_movie_file_in_sub_dir(context):
-    # Create movie file in subdirectory
-    context.tmp_movie_file = tempfile.NamedTemporaryFile(
+@given(u'a text file in the subdirectory')
+def step_given_a_text_file_in_the_subdirectory(context):
+    # Create text file in subdirectory
+    context.tmp_txt_file = tempfile.NamedTemporaryFile(
         mode='w+b',
-        suffix='.mov',
+        suffix='.txt',
         delete=False,
         dir=context.sub_dir,
         )
-    assert exists(context.tmp_movie_file.name)
+    assert exists(context.tmp_txt_file.name)
+
+
+@given(u'an image file in the second subdirectory')
+def step_impl(context):
+    # Create jpeg file in subdirectory
+    context.tmp_txt_file = tempfile.NamedTemporaryFile(
+        mode='w+b',
+        suffix='.jpeg',
+        delete=False,
+        dir=context.second_sub_dir,
+        )
+    assert exists(context.tmp_txt_file.name)
 
 
 @given(u'a sort path argument')
@@ -217,3 +271,8 @@ def step_two_movie_files_moved(context):
     file_name = path.basename(context.second_tmp_movie_file.name)
     new_file_name = path.join(context.file_sorter.movie_dir, file_name)
     assert exists(new_file_name)
+
+
+@then(u'the subdirectory should be deleted')
+def step_is_subdirectory_deleted(context):
+    assert False
