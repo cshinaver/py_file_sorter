@@ -5,6 +5,19 @@ from shutil import move, rmtree
 import argparse
 
 
+MOVIE_FILE_EXTENTIONS = (
+    '.mpeg',
+    '.mpg',
+    '.avi',
+    '.mov',
+    '.qt',
+    '.wmv',
+    '.mp4',
+    '.ogm',
+    '.mkv',
+    )
+
+
 class FileSort:
     sort_dir = ''
     movie_dir = ''
@@ -44,16 +57,7 @@ class FileSort:
         file_extension = file_extension[1]
 
         # Movie Selection and Sorting
-        if file_extension in ('.mpeg',
-                              '.mpg',
-                              '.avi',
-                              '.mov',
-                              '.qt',
-                              '.wmv',
-                              '.mp4',
-                              '.ogm',
-                              '.mkv'
-                              ):
+        if file_extension in MOVIE_FILE_EXTENTIONS:
             # TODO 1. Possibly add something to differentiate between
             # TV Shows and
             # Movies (if not Lynda.com files)
@@ -71,7 +75,7 @@ class FileSort:
 
                 self.directory_exists(self.movie_dir)
                 move(file_path, self.movie_dir)
-                #remove_dirtree(file_path)
+                # If any other 
                 print('{0} was moved to {1}'.format(
                     file_name,
                     self.movie_dir,
