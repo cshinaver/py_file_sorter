@@ -47,6 +47,14 @@ Feature: Download_Sorter (Natural Language)
         When the sorter is started
         Then two movie files should be moved to the Movie Folder
 
+    Scenario: Subdirectories
+        Given a sort path
+        And a subdirectory
+        And a movie file in the subdirectory
+        And a movie path
+        When the sorter is started
+        Then the movie file should be moved to the Movie Folder
+
     # Scenario: TV Show
     #     Given a sort path
     #     And a TV Show path
