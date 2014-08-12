@@ -51,6 +51,11 @@ class FileSort:
         """
         Sorts given filepath into Movies and Learning Videos
         """
+
+        # Sort path
+        working_full_path = os.path.join(file_path, os.pardir)
+        working_sort_path = os.path.abspath(working_full_path)
+
         # Get file extension
         file_name = os.path.basename(file_path)
         file_extension = os.path.splitext(file_path)
@@ -75,7 +80,6 @@ class FileSort:
 
                 self.directory_exists(self.movie_dir)
                 move(file_path, self.movie_dir)
-                # If any other 
                 print('{0} was moved to {1}'.format(
                     file_name,
                     self.movie_dir,
@@ -98,15 +102,14 @@ class FileSort:
             for file in files:
                 file_path = os.path.join(sort_dir, file)
                 self.primary_sort(file_path)
+        self.remove_sorted_dirtree(self.sort_dir)
         print("Sorting Complete.")
 
-    def remove_dirtree(file_path):
+    def remove_sorted_dirtree(self, sort_path):
         #TODO Finish this function
         """Removes parent dirtree for given file_path"""
-        len_sort_dir = len(SORTING_DIRECTORY_PATH)
-        print(file_path)
-        print(file_path[len_sort_dir:])
-
+        if ".sorted" in os.listdir(sort_path):
+            print "yay"
     # my_file_path = os.path.join(SORTING_DIRECTORY_PATH, 'mah_dir')
     # my_file_path = os.path.join(my_file_path, 'show.mkv')
     # remove_dirtree(my_file_path)
