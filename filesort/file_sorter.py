@@ -101,7 +101,7 @@ class FileSort:
 
     def main_sorter(self):
         """Main function"""
-        print("Beginning file sort...")
+        print("Beginning file sort of dir %s...") % self.sort_dir
 
         if not self.sort_dir:
             print("No --sort-dir flag passed")
