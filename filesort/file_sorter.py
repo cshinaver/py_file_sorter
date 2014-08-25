@@ -60,7 +60,6 @@ class FileSort:
             # Movies (if not Lynda.com files)
 
             # Try guessit library to get movie type
-            guessit.guess_file_info(file_path)
             file_info = guessit.guess_file_info(file_path)
 
             if "Lynda" in file_name and self.lynda_dir:
