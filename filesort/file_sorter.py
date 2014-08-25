@@ -135,6 +135,11 @@ def parse_args():
         help='String to movie dir',
         )
 
+    parser.add_argument(
+        '--tv-show-dir',
+        dest='tv_show_dir',
+        help='String to tv show dir',
+        )
     return parser.parse_args()
 
 
