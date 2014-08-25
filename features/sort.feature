@@ -55,9 +55,12 @@ Feature: Download_Sorter (Natural Language)
         When the sorter is started
         Then the movie file should be moved to the Movie Folder
 
-    # Scenario: TV Show
-    #     Given a sort path
-    #     And a TV Show path
-    #     When the file is a movie file
-    #     And it is smaller than 400MB
-    #     Then the file should be moved to the TV Shows Folder
+    Scenario: Differentiate Movie and TV Shows
+        Given a sort path
+        And a TV Shows path
+        And a movie path
+        And a movie file
+        And a TV Shows file
+        When the sorter is started
+        Then the movie file should be moved to the Movie Folder
+        Then the TV Show file should be moved to the TV Shows Folder
