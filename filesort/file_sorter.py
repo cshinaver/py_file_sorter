@@ -3,6 +3,7 @@
 import os
 from shutil import move, rmtree
 import argparse
+import guessit
 
 
 class FileSort:
@@ -57,6 +58,10 @@ class FileSort:
             # TODO 1. Possibly add something to differentiate between
             # TV Shows and
             # Movies (if not Lynda.com files)
+
+            # Try guessit library to get movie type
+            guessit.guess_file_info(file_path)
+
             if "Lynda" in file_name and self.lynda_dir:
                 self.directory_exists(self.lynda_dir)
                 move(file_path, self.lynda_dir)
