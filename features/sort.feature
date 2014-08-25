@@ -31,14 +31,14 @@ Feature: Download_Sorter (Natural Language)
         And the Lynda movie should not be moved 
         And the music file should not be moved
 
-    Scenario: Test input
-        Given a sort path
-        And a sort path argument
-        And a movie path
-        And a movie path argument
-        And a movie file
-        When the sorter is started with arguments
-        Then the movie file should be moved to the Movie Folder
+    #Scenario: Test input
+    #    Given a sort path
+    #    And a sort path argument
+    #    And a movie path
+    #   And a movie path argument
+    #    And a movie file
+    #    When the sorter is started with arguments
+    #    Then the movie file should be moved to the Movie Folder
 
     Scenario: Multiple Movies
         Given a sort path
@@ -55,12 +55,12 @@ Feature: Download_Sorter (Natural Language)
         When the sorter is started
         Then the movie file should be moved to the Movie Folder
 
-    Scenario: Differentiate Movie and TV Shows
-        Given a sort path
-        And a TV Shows path
-        And a movie path
-        And a movie file
-        And a TV Shows file
-        When the sorter is started
-        Then the movie file should be moved to the Movie Folder
-        Then the TV Show file should be moved to the TV Shows Folder
+    #Scenario: Differentiate Movie and TV Shows
+    #    Given a sort path
+    #   And a TV Shows path
+    #    And a movie path
+    #    And a movie file
+    #    And a TV Shows file
+    #    When the sorter is started
+    #    Then the movie file should be moved to the Movie Folder
+    #   Then the TV Show file should be moved to the TV Shows Folder
