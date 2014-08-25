@@ -207,7 +207,6 @@ def step_tv_show_file_mobed(context):
     # Test
     file_name = path.basename(context.tmp_tv_show_file.name)
     new_file_name = path.join(context.file_sorter.tv_show_dir, file_name)
-    import ipdb; ipdb.set_trace()
     assert exists(new_file_name)
 
 
