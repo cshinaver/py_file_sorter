@@ -108,7 +108,7 @@ class FileSort:
     # remove_dirtree(my_file_path)
 
 
-def parse_args(args):
+def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument(
         '--sort-dir',
@@ -121,7 +121,7 @@ def parse_args(args):
         help='String to movie dir',
         )
 
-    return parser.parse_args(args)
+    return parser.parse_args()
 
 
 def main():
