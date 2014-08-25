@@ -61,6 +61,7 @@ class FileSort:
 
             # Try guessit library to get movie type
             guessit.guess_file_info(file_path)
+            file_info = guessit.guess_file_info(file_path)
 
             if "Lynda" in file_name and self.lynda_dir:
                 self.directory_exists(self.lynda_dir)
@@ -71,6 +72,15 @@ class FileSort:
                     ))
             elif "Lynda" in file_name and not self.lynda_dir:
                 return
+
+            elif file_info['type'] == 'episode':
+                self.directory_exists(self.tv_show_dir)
+                move(file_path, self.tv_show_dir)
+                #remove_dirtree(file_path)
+                print('{0} was moved to {1}'.format(
+                    file_name,
+                    self.tv_show_dir,
+                    ))
             else:
                 # TODO 2. Also, remove directory after transfer
 
