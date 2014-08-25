@@ -14,9 +14,26 @@ Feature: Download_Sorter (Natural Language)
 """
 from behave import *  # noqa
 import tempfile
-from os.path import isdir, exists
-from os import path
+from os.path import isdir, exists, join
+from os import path, mkdir
 from filesort.file_sorter import FileSort, parse_args
+
+
+@given(u'a TV Shows path')
+def step_given_tv_shows_path(context):
+    # Make TV Shows dir
+    context.file_sorter.tv_show_dir = tempfile.mkdtemp(
+        prefix='tmp_tv_show_dir',
+        dir=context.tmp_files_dir,
+        )
+    print("Created tv_show_dir at {0}".format(context.file_sorter.tv_show_dir))
+    assert isdir(context.file_sorter.tv_show_dir)
+
+@given(u'a TV Shows file')
+def step_given_tv_shows_file(context):
+    context.tmp_tv_show_file = open(join(context.file_sorter.sort_dir, "silicon.valley.s01e01.720p.hdtv.x264-killers.mp4"), "w")
+    context.tmp_tv_show_file.close()
+    assert exists(context.tmp_tv_show_file.name)
 
 
 @given(u'two movie files')
@@ -183,6 +200,15 @@ def step_sorter_started_with_arguments(context):
 @then(u'the Lynda movie should not be moved')
 def step_Lynda_movie_file_not_moved(context):
     assert exists(context.tmp_lynda_movie_file.name)
+
+
+@then(u'the TV Show file should be moved to the TV Shows Folder')
+def step_tv_show_file_mobed(context):
+    # Test
+    file_name = path.basename(context.tmp_tv_show_file.name)
+    new_file_name = path.join(context.file_sorter.tv_show_dir, file_name)
+    import ipdb; ipdb.set_trace()
+    assert exists(new_file_name)
 
 
 @then(u'the music file should not be moved')
