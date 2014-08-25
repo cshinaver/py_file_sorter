@@ -59,16 +59,21 @@ class FileSort:
 
             if "Lynda" in file_name and self.lynda_dir:
                 self.directory_exists(self.lynda_dir)
+                print("Moving %s to %s") % (file_name, self.lynda_dir)
                 move(file_path, self.lynda_dir)
                 print('{0} was moved to {1}'.format(
                     file_name,
                     self.lynda_dir,
                     ))
             elif "Lynda" in file_name and not self.lynda_dir:
+                print(
+                    "Found Lynda file %s but no lynda dir specified. Not moving"
+                    ) % (file_name)
                 return
 
             elif file_info['type'] == 'episode':
                 self.directory_exists(self.tv_show_dir)
+                print("Moving %s to %s") % (file_name, self.tv_show_dir)
                 move(file_path, self.tv_show_dir)
                 #remove_dirtree(file_path)
                 print('{0} was moved to {1}'.format(
@@ -79,6 +84,7 @@ class FileSort:
                 # TODO 2. Also, remove directory after transfer
 
                 self.directory_exists(self.movie_dir)
+                print("Moving %s to %s") % (file_name, self.movie_dir)
                 move(file_path, self.movie_dir)
                 #remove_dirtree(file_path)
                 print('{0} was moved to {1}'.format(
