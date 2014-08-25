@@ -32,8 +32,6 @@ class FileSort:
             setattr(self, directory, directory_location)
 
 
-    #TODO Write function that takes args like sort_downloads,
-    # sort_TV_Shows, sort_Movies
     def primary_sort(self, file_path):
         #TODO Add sorting for Other things that aren't videos
         """
@@ -55,9 +53,6 @@ class FileSort:
                               '.ogm',
                               '.mkv'
                               ):
-            # TODO 1. Possibly add something to differentiate between
-            # TV Shows and
-            # Movies (if not Lynda.com files)
 
             # Try guessit library to get movie type
             file_info = guessit.guess_file_info(file_path)
