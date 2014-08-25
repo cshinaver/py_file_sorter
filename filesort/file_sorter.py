@@ -102,6 +102,11 @@ class FileSort:
     def main_sorter(self):
         """Main function"""
         print("Beginning file sort...")
+
+        if not self.sort_dir:
+            print("No --sort-dir flag passed")
+            return
+
         # Recursively sort SORTING_DIRECTORY_PATH
         for sort_dir, dirs, files in os.walk(self.sort_dir):
             print("Checking " + str(sort_dir))
