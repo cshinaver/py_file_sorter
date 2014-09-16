@@ -4,5 +4,6 @@ python:
 # command to install dependencies
 install:
   - "pip install behave"
+  - "pip install guessit"
 # command to run tests
 script: behave
