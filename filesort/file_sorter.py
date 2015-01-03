@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """Sorts downloads folder"""
 import os
-from shutil import move, rmtree
+from shutil import move, rmtree, Error
 import argparse
 import guessit
 
@@ -60,7 +60,11 @@ class FileSort:
             if "Lynda" in file_name and self.lynda_dir:
                 self.directory_exists(self.lynda_dir)
                 print("Moving %s to %s") % (file_name, self.lynda_dir)
-                move(file_path, self.lynda_dir)
+                try:
+                    move(file_path, self.lynda_dir)
+                except Error:
+                    print ("{0} already exists. Not moving".format(file_name))
+                    return
                 print('{0} was moved to {1}'.format(
                     file_name,
                     self.lynda_dir,
@@ -74,7 +78,12 @@ class FileSort:
             elif file_info['type'] == 'episode':
                 self.directory_exists(self.tv_show_dir)
                 print("Moving %s to %s") % (file_name, self.tv_show_dir)
-                move(file_path, self.tv_show_dir)
+                try:
+                    move(file_path, self.tv_show_dir)
+                except Error:
+                    print ("{0} already exists. Not moving".format(file_name))
+                    return
+
                 #remove_dirtree(file_path)
                 print('{0} was moved to {1}'.format(
                     file_name,
@@ -85,7 +94,11 @@ class FileSort:
 
                 self.directory_exists(self.movie_dir)
                 print("Moving %s to %s") % (file_name, self.movie_dir)
-                move(file_path, self.movie_dir)
+                try:
+                    move(file_path, self.movie_dir)
+                except Error:
+                    print ("{0} already exists. Not moving".format(file_name))
+                    return
                 #remove_dirtree(file_path)
                 print('{0} was moved to {1}'.format(
                     file_name,
